@@ -26,3 +26,7 @@ run = "tox"
 [tasks.test]
 description = "Run the test suite on every Python version"
 run = "tox -e py314,py315"
+
+[tasks.lint]
+description = "Run flake8, radon and vulture"
+run = "tox -e lint,complexity,deadcode"
