@@ -37,3 +37,17 @@ def test_settings_are_immutable():
 
     with pytest.raises(AttributeError):
         settings.port = 1
+
+
+def test_sentry_is_unconfigured_by_default():
+    settings = Settings.from_env({})
+
+    assert settings.sentry_dsn is None
+    assert settings.sentry_environment == "production"
+    assert settings.sentry_sample_rate == 1.0
+
+
+@pytest.mark.parametrize("rate", ["abc", "-0.1", "1.5"])
+def test_rejects_an_invalid_sentry_sample_rate(rate):
+    with pytest.raises(ValueError, match="SENTRY_SAMPLE_RATE"):
+        Settings.from_env({"SENTRY_SAMPLE_RATE": rate})

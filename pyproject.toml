@@ -17,6 +17,7 @@ readme = "README.md"
 dynamic = ["version"]
 dependencies = [
     "falcon>=4.4,<5",
+    "sentry-sdk>=2.71,<3",
     "uvicorn[standard]>=0.54,<0.55",
 ]
 classifiers = [

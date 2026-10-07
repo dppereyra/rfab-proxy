@@ -76,3 +76,12 @@ def test_unhandled_exception_returns_a_json_500_and_is_logged(settings, caplog):
     assert result.json == {"title": "500 Internal Server Error"}
     assert "secret detail" not in result.text
     assert any(record.exc_info for record in caplog.records)
+
+
+def test_create_app_initialises_sentry(settings, monkeypatch):
+    seen = []
+    monkeypatch.setattr("rfab_proxy.app.init_sentry", seen.append)
+
+    create_app(settings)
+
+    assert seen == [settings]
