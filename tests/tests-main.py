@@ -1,7 +1,7 @@
 from rfab_proxy import __main__ as entrypoint
 
 
-def test_main_serves_the_app_factory_with_uvicorn(monkeypatch):
+def test_main_serves_the_instrumented_app_factory_with_uvicorn(monkeypatch):
     calls = []
     monkeypatch.setattr(
         entrypoint.uvicorn, "run", lambda *args, **kwargs: calls.append((args, kwargs))
@@ -12,7 +12,7 @@ def test_main_serves_the_app_factory_with_uvicorn(monkeypatch):
     entrypoint.main()
 
     (args, kwargs), = calls
-    assert args == ("rfab_proxy.app:create_app",)
+    assert args == ("rfab_proxy.app:create_asgi_app",)
     assert kwargs["factory"] is True
     assert kwargs["host"] == "0.0.0.0"
     assert kwargs["port"] == 9000

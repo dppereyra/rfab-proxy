@@ -62,3 +62,42 @@ def test_configure_logging_keeps_handlers_it_did_not_install():
         assert other in logging.getLogger().handlers
     finally:
         logging.getLogger().removeHandler(other)
+
+
+def test_http_client_request_logs_are_silenced():
+    # httpx logs every request URL at INFO, query strings and userinfo included.
+    configure_logging("DEBUG")
+
+    assert logging.getLogger("httpx").level == logging.WARNING
+    assert logging.getLogger("httpcore").level == logging.WARNING
+
+
+def test_access_log_query_values_are_redacted():
+    configure_logging("INFO")
+    record = logging.LogRecord(
+        "uvicorn.access",
+        logging.INFO,
+        __file__,
+        1,
+        '%s - "%s %s HTTP/%s" %d',
+        ("127.0.0.1:5000", "GET", "/r?token=abc123", "1.1", 404),
+        None,
+    )
+
+    assert logging.getLogger("uvicorn.access").filter(record)
+    assert record.getMessage() == '127.0.0.1:5000 - "GET /r?token=REDACTED HTTP/1.1" 404'
+
+
+def test_access_log_filter_ignores_unexpected_records():
+    configure_logging("INFO")
+    record = logging.LogRecord("uvicorn.access", logging.INFO, __file__, 1, "plain", (), None)
+
+    assert logging.getLogger("uvicorn.access").filter(record)
+    assert record.getMessage() == "plain"
+
+
+def test_access_log_filter_is_installed_once():
+    configure_logging("INFO")
+    configure_logging("INFO")
+
+    assert len(logging.getLogger("uvicorn.access").filters) == 1
