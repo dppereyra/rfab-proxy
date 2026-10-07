@@ -136,3 +136,6 @@ __marimo__/
 
 # VS Code local history
 .history/
+
+# Exported OpenAPI document (generated from the routes)
+/openapi.json

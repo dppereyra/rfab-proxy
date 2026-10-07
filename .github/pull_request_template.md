@@ -26,6 +26,6 @@ Closes #
 
 - [ ] `tox` passes locally
 - [ ] Tests were written first and cover the change (branch coverage stays at or above 90%)
-- [ ] `src/rfab_proxy/openapi.yaml` is updated if endpoints changed
+- [ ] New or changed endpoints are documented with `@api.validate(...)`, a docstring and Pydantic models
 - [ ] No credentials, tokens or personal data in code, tests, logs or this description
 - [ ] `uv.lock` is updated if dependencies changed

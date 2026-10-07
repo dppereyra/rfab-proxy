@@ -936,8 +936,9 @@ dependencies = [
     { name = "opentelemetry-instrumentation-asgi" },
     { name = "opentelemetry-instrumentation-httpx" },
     { name = "opentelemetry-sdk" },
-    { name = "pyyaml" },
+    { name = "pydantic" },
     { name = "sentry-sdk" },
+    { name = "spectree" },
     { name = "uvicorn", extra = ["standard"] },
 ]
 
@@ -945,7 +946,6 @@ dependencies = [
 dev = [
     { name = "bandit" },
     { name = "flake8" },
-    { name = "jsonschema" },
     { name = "openapi-spec-validator" },
     { name = "pytest" },
     { name = "pytest-cov" },
@@ -959,17 +959,17 @@ requires-dist = [
     { name = "falcon", specifier = ">=4.4,<5" },
     { name = "flake8", marker = "extra == 'dev'", specifier = "~=7.4.1" },
     { name = "httpx", specifier = ">=0.28,<0.29" },
-    { name = "jsonschema", marker = "extra == 'dev'", specifier = ">=4.26,<5" },
     { name = "openapi-spec-validator", marker = "extra == 'dev'", specifier = "~=0.9.0" },
     { name = "opentelemetry-exporter-otlp-proto-http", specifier = ">=1.45,<2" },
     { name = "opentelemetry-instrumentation-asgi", specifier = ">=0.66b1,<1" },
     { name = "opentelemetry-instrumentation-httpx", specifier = ">=0.66b1,<1" },
     { name = "opentelemetry-sdk", specifier = ">=1.45,<2" },
+    { name = "pydantic", specifier = ">=2.13,<3" },
     { name = "pytest", marker = "extra == 'dev'", specifier = ">=9.1,<9.2" },
     { name = "pytest-cov", marker = "extra == 'dev'", specifier = ">=7.1,<7.2" },
-    { name = "pyyaml", specifier = ">=6.0.3,<7" },
     { name = "radon", marker = "extra == 'dev'", specifier = "~=6.0.1" },
     { name = "sentry-sdk", specifier = ">=2.71,<3" },
+    { name = "spectree", specifier = ">=3.0,<4" },
     { name = "uvicorn", extras = ["standard"], specifier = ">=0.54,<0.55" },
     { name = "vulture", marker = "extra == 'dev'", specifier = "~=2.16" },
 ]
@@ -1086,6 +1086,15 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/94/e7/b2c673351809dca68a0e064b6af791aa332cf192da575fd474ed7d6f16a2/six-1.17.0.tar.gz", hash = "sha256:ff70335d468e7eb6ec65b95b99d3a2836546063f63acc5171de367e834932a81", size = 34031, upload-time = "2024-12-04T17:35:28.174Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/b7/ce/149a00dd41f10bc29e5921b496af8b574d8413afcd5e30dfa0ed46c2cc5e/six-1.17.0-py2.py3-none-any.whl", hash = "sha256:4721f391ed90541fddacab5acf947aa0d3dc7d27b2e1e8eda2be8970586c3274", size = 11050, upload-time = "2024-12-04T17:35:26.475Z" },
+]
+
+[[package]]
+name = "spectree"
+version = "3.0.0"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/a9/41/083cea293498afdcbc5ab432020a67b12951ef60ed89285ec9bb58824f0a/spectree-3.0.0.tar.gz", hash = "sha256:5d8db610f1f0adfddf9200c8b022f49e587b72b117e1958b9939b29258910452", size = 57076, upload-time = "2026-09-10T15:20:29.148Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/35/bf/8b2436b30128b161610feabf8cd067b593492a5db09b9c4557e187b3ab6a/spectree-3.0.0-py3-none-any.whl", hash = "sha256:6fe5f6beb6fe26dd57cc206f4ada5af01aeff20d67398664eda9dd01564236d2", size = 53392, upload-time = "2026-09-10T15:20:27.922Z" },
 ]
 
 [[package]]
