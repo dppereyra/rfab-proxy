@@ -30,3 +30,10 @@ run = "tox -e py314,py315"
 [tasks.lint]
 description = "Run flake8, radon and vulture"
 run = "tox -e lint,complexity,deadcode"
+
+[tasks.security]
+description = "Run bandit and a local Trivy scan"
+run = [
+  "tox -e security",
+  "trivy fs --scanners vuln,misconfig,secret --disable-telemetry --skip-dirs .venv --skip-dirs .tox --exit-code 1 .",
+]
