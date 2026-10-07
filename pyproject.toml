@@ -37,5 +37,6 @@ type = "virtual"
 features = ["dev"]
 installer = "uv"
 
+# Local convenience only; tox (tox.ini) is the canonical runner and these mirror it.
 [tool.hatch.envs.default.scripts]
 tests = "pytest"

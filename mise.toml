@@ -17,3 +17,12 @@ helm = "4.3.0"
 [tasks."ci:versions"]
 description = "Print the CI Python matrix and uv version as JSON"
 run = "python3 scripts/ci_versions.py mise.toml"
+
+# Short aliases for the tox envs; tox stays the canonical runner.
+[tasks.tox]
+description = "Run every tox env"
+run = "tox"
+
+[tasks.test]
+description = "Run the test suite on every Python version"
+run = "tox -e py314,py315"
