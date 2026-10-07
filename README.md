@@ -1,25 +1,30 @@
 # rfab-proxy
 
-**Use [rfab.ai](https://rfab.ai) from anywhere on your machine through one common API endpoint.**
+**Use [rfab.ai](https://rfab.ai) from the AI tools on your machine, through the APIs they already speak.**
 
-rfab-proxy is a small service you run locally. It sits between rfab.ai and the tools on your own
-system, and exposes rfab.ai through a common API endpoint. Any local app, script or integration that
-speaks that API can then use rfab.ai by pointing at `http://127.0.0.1:8000`, with no rfab.ai-specific
-client code of its own.
+Many local AI applications talk to a model server through a handful of widely used APIs, such as
+the [Ollama API](https://docs.ollama.com/api). rfab-proxy is a small
+service you run locally that presents rfab.ai behind those common APIs. A tool that already knows
+how to talk to one of them can use rfab.ai by pointing at `http://127.0.0.1:8000`, without any
+rfab.ai-specific code.
 
 ```text
  your local tools ──► rfab-proxy (localhost) ──► rfab.ai
- (apps, scripts,       one common endpoint
-  integrations)
+ (apps, scripts,       common AI APIs
+  integrations)        (e.g. the Ollama API)
 ```
+
+Which APIs rfab-proxy will offer hasn't been decided yet. The Ollama API is the reference example,
+and the others will be chosen by what the tools people want to connect actually use.
 
 > rfab-proxy is an independent, unofficial project and is not affiliated with rfab.ai.
 
 ## Status
 
 Early development. The service foundation is in place: the ASGI application, configuration,
-health probes, structured logging, error reporting, tracing and the OpenAPI document. The rfab.ai
-proxy endpoints themselves are the next milestone (see [Roadmap](#roadmap)).
+health probes, structured logging, error reporting, tracing and the OpenAPI document. Choosing the
+common APIs and implementing the rfab.ai proxy endpoints behind them is the next milestone (see
+[Roadmap](#roadmap)).
 
 What runs today:
 
@@ -86,7 +91,7 @@ To report a vulnerability, see [SECURITY.md](.github/SECURITY.md).
 |---|---|
 | Setup initial project | Packaging, tooling, CI, the application skeleton, observability and the OpenAPI document |
 | Setup release pipeline | Automated, versioned releases |
-| Road to v1 | The rfab.ai proxy endpoints |
+| Road to v1 | The common APIs to support, and the rfab.ai proxy endpoints behind them |
 | Setup authentication | Authentication for the proxy |
 | Publish software | A public Docker image and a Helm chart |
 | Create wiki on GitHub Pages | Documentation at [dppereyra.github.io/rfab-proxy](https://dppereyra.github.io/rfab-proxy) |
