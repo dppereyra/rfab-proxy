@@ -23,6 +23,7 @@ classifiers = [
 
 [project.optional-dependencies]
 dev = [
+    "bandit~=1.9.4",
     "flake8~=7.4.1",
     "pytest>=9.1,<9.2",
     "pytest-cov>=7.1,<7.2",
@@ -51,3 +52,4 @@ complexity = [
   "radon hal src tests"
 ]
 deadcode = "vulture --min-confidence 75 src"
+security = "bandit -r src"

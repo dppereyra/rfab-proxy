@@ -1,0 +1,46 @@
+version: 2
+
+updates:
+  # Python dependencies: pyproject.toml ranges and the uv.lock pins.
+  - package-ecosystem: uv
+    directory: /
+    schedule:
+      interval: weekly
+      day: friday
+      time: "06:00"
+      timezone: Etc/UTC
+    open-pull-requests-limit: 10
+    labels:
+      - dependencies
+      - python
+    commit-message:
+      prefix: "build(deps)"
+      prefix-development: "build(deps-dev)"
+    groups:
+      dev-dependencies:
+        patterns:
+          - bandit
+          - flake8
+          - pytest
+          - pytest-cov
+          - radon
+          - vulture
+
+  # Actions pinned in .github/workflows.
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: friday
+      time: "06:00"
+      timezone: Etc/UTC
+    open-pull-requests-limit: 10
+    labels:
+      - dependencies
+      - github-actions
+    commit-message:
+      prefix: ci
+    groups:
+      github-actions:
+        patterns:
+          - "*"
