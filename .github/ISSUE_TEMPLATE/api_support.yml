@@ -1,0 +1,46 @@
+name: Common API support
+description: Ask rfab-proxy to expose rfab.ai through an API that your local tools already speak.
+title: "api: support the <API name>"
+labels: [api-support, triage]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        rfab-proxy presents rfab.ai behind the common APIs local AI tools already use, such as
+        the [Ollama API](https://docs.ollama.com/api). Which APIs it supports is decided by what
+        people actually need to connect, so tell us about your use case.
+  - type: input
+    id: api
+    attributes:
+      label: Which API?
+      description: The API family and a link to its documentation.
+      placeholder: e.g. the Ollama API, https://docs.ollama.com/api
+    validations:
+      required: true
+  - type: textarea
+    id: tools
+    attributes:
+      label: Which tools would use it?
+      description: The applications, editors, plugins or scripts you want to connect to rfab.ai, with links.
+    validations:
+      required: true
+  - type: textarea
+    id: endpoints
+    attributes:
+      label: Endpoints and features they need
+      description: The specific endpoints and features those tools call, if you know them.
+      placeholder: |
+        - POST /api/chat (streaming)
+        - GET /api/tags
+  - type: textarea
+    id: context
+    attributes:
+      label: Anything else?
+      description: Workarounds you use today, or limitations you expect.
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Before submitting
+      options:
+        - label: I searched the existing issues and this API hasn't been requested.
+          required: true

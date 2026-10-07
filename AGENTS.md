@@ -26,6 +26,10 @@ it. Work that arrives mid-task and isn't covered by the issue in hand gets its
   open-source proposals manageable, so it never applies to the project's own
   PRs: the repository owner, members, collaborators and bots (Dependabot,
   release automation) are exempt.
+- Issues are opened through the forms in `.github/ISSUE_TEMPLATE/` (bug report,
+  feature request, common API support; blank issues are off), and PRs start
+  from `.github/pull_request_template.md`. Keep them in step with
+  CONTRIBUTING.md when the process changes.
 
 ## Identity and accounts
 

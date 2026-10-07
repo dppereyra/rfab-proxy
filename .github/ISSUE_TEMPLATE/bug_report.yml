@@ -1,0 +1,80 @@
+name: Bug report
+description: Something in rfab-proxy doesn't work as expected.
+title: "bug: "
+labels: [bug, triage]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report this. **Never paste API keys, tokens, cookies or
+        other credentials** into this issue. Remove them from logs and commands first.
+        For security vulnerabilities, use [private reporting](https://github.com/dppereyra/rfab-proxy/security/advisories/new) instead.
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: A clear description of the problem.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What did you expect to happen?
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: The smallest set of steps, requests or commands that shows the problem.
+      placeholder: |
+        1. Start rfab-proxy with `RFAB_PORT=8000 rfab-proxy`
+        2. Run `curl http://127.0.0.1:8000/...`
+        3. See the error
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: rfab-proxy version
+      description: The release, or the commit if you run from source (`git rev-parse --short HEAD`).
+      placeholder: v0.1.0 or a1b2c3d
+    validations:
+      required: true
+  - type: dropdown
+    id: install
+    attributes:
+      label: How do you run rfab-proxy?
+      options:
+        - From source (uv / mise)
+        - Docker image
+        - Helm chart
+        - Other
+    validations:
+      required: true
+  - type: input
+    id: client
+    attributes:
+      label: Client tool and API
+      description: The tool talking to rfab-proxy, and which API it uses, if relevant.
+      placeholder: e.g. Open WebUI through the Ollama API
+  - type: input
+    id: environment
+    attributes:
+      label: Operating system and Python version
+      placeholder: e.g. macOS 26, Python 3.14.8
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant logs
+      description: rfab-proxy logs JSON lines. Remove any credentials before pasting.
+      render: shell
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Before submitting
+      options:
+        - label: I searched the existing issues and this hasn't been reported.
+          required: true
+        - label: I removed all credentials and personal data from this report.
+          required: true
