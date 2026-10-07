@@ -7,8 +7,10 @@ rule is enforced automatically.
 
 **A pull request that doesn't link an open issue in this repository is closed automatically.**
 
-1. Find an existing [issue](https://github.com/dppereyra/rfab-proxy/issues), or open a new one
-   describing the bug or the change you'd like to make.
+1. Find an existing [issue](https://github.com/dppereyra/rfab-proxy/issues), or
+   [open a new one](https://github.com/dppereyra/rfab-proxy/issues/new/choose) with the form that
+   fits: **Bug report**, **Feature request**, or **Common API support** to ask for an API your
+   tools speak.
 2. Wait for it to be discussed and accepted before investing time in code. This is especially
    important for new features and for which common APIs rfab-proxy should support.
 3. Open your pull request against `master` and link the issue in the description with a closing
