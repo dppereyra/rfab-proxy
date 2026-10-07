@@ -10,6 +10,9 @@ updates:
       time: "06:00"
       timezone: Etc/UTC
     open-pull-requests-limit: 10
+    # Let new releases age before proposing them (supply-chain hygiene).
+    cooldown:
+      default-days: 7
     labels:
       - dependencies
       - python
@@ -35,6 +38,9 @@ updates:
       time: "06:00"
       timezone: Etc/UTC
     open-pull-requests-limit: 10
+    # Let new releases age before proposing them (supply-chain hygiene).
+    cooldown:
+      default-days: 7
     labels:
       - dependencies
       - github-actions
