@@ -24,8 +24,9 @@ dependencies = [
     "opentelemetry-instrumentation-asgi>=0.66b1,<1",
     "opentelemetry-instrumentation-httpx>=0.66b1,<1",
     "opentelemetry-sdk>=1.45,<2",
-    "pyyaml>=6.0.3,<7",
+    "pydantic>=2.13,<3",
     "sentry-sdk>=2.71,<3",
+    "spectree>=3.0,<4",
     "uvicorn[standard]>=0.54,<0.55",
 ]
 classifiers = [
@@ -37,7 +38,6 @@ classifiers = [
 dev = [
     "bandit~=1.9.4",
     "flake8~=7.4.1",
-    "jsonschema>=4.26,<5",
     "openapi-spec-validator~=0.9.0",
     "pytest>=9.1,<9.2",
     "pytest-cov>=7.1,<7.2",
@@ -70,4 +70,7 @@ complexity = [
 ]
 deadcode = "vulture --min-confidence 75 src"
 security = "bandit -r src"
-openapi = "openapi-spec-validator src/rfab_proxy/openapi.yaml"
+openapi = [
+  "python -m rfab_proxy.openapi --output openapi.json",
+  "openapi-spec-validator openapi.json",
+]

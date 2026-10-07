@@ -9,7 +9,7 @@ from rfab_proxy.config import Settings
 from rfab_proxy.health import Liveness, Readiness
 from rfab_proxy.logging import configure_logging
 from rfab_proxy.monitoring import init_sentry
-from rfab_proxy.openapi import OpenAPISpec
+from rfab_proxy.openapi import api
 from rfab_proxy.telemetry import instrument, telemetry_from_env
 
 log = logging.getLogger(__name__)
@@ -25,7 +25,7 @@ def create_app(settings=None, readiness_checks=()):
     app.add_error_handler(Exception, _handle_unexpected_error)
     app.add_route("/healthz", Liveness())
     app.add_route("/readyz", Readiness(readiness_checks))
-    app.add_route("/openapi.json", OpenAPISpec())
+    api.register(app)  # serves the generated document under /docs/
     return app
 
 

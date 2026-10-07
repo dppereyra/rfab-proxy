@@ -32,7 +32,8 @@ What runs today:
 |---|---|
 | `GET /healthz` | Liveness probe: `{"status": "alive"}` |
 | `GET /readyz` | Readiness probe: `{"status": "ready"}`, or 503 when not ready |
-| `GET /openapi.json` | The OpenAPI 3.1 description of the API |
+| `GET /docs/openapi.json` | The OpenAPI 3.1 description of the API, generated from the routes |
+| `GET /docs/swagger`, `/docs/redoc`, `/docs/scalar` | Interactive API documentation |
 
 ## Quick start
 
@@ -106,8 +107,8 @@ mise run test         # tests on every supported Python
 ```
 
 - `src/rfab_proxy/` holds the application and `tests/` the test suite (files named `tests-*.py`).
-- The API is described first in `src/rfab_proxy/openapi.yaml`; a test fails if the routes and the
-  spec disagree.
+- The OpenAPI document is generated from the Falcon routes (spectree with Pydantic models), so it
+  can't drift from the code. Export it with `python -m rfab_proxy.openapi --output openapi.json`.
 - Development is test-driven, with branch coverage of at least 90%.
 
 Working agreements for contributors and coding agents are in [AGENTS.md](AGENTS.md).

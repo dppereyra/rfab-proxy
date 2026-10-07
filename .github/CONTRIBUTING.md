@@ -59,7 +59,7 @@ That covers:
 
 - tests on Python 3.14 and 3.15, with **branch coverage of at least 90%**
 - `flake8` (line length 99, complexity 8), `bandit`, `radon` and `vulture`
-- the OpenAPI document (`openapi-spec-validator`) and the `uv.lock` consistency check
+- the generated OpenAPI document (`openapi-spec-validator`) and the `uv.lock` consistency check
 
 CI also runs a Trivy scan for vulnerabilities, misconfigurations and secrets.
 
@@ -67,8 +67,9 @@ Please also follow these conventions:
 
 - **Write the test first.** Behaviour changes come with tests that fail without the change.
 - Test files live in `tests/` and are named `tests-*.py`.
-- If you add or change an endpoint, update `src/rfab_proxy/openapi.yaml` in the same pull request.
-  A test fails when the routes and the specification disagree.
+- The OpenAPI document is generated from the routes. Document every endpoint with
+  `@api.validate(...)`, a docstring (its first line becomes the summary) and Pydantic models in
+  `src/rfab_proxy/schemas.py`. A test fails when an exposed route is missing from the document.
 - Never log, trace or report credentials, tokens or other secrets.
 - After changing dependencies in `pyproject.toml`, run `uv lock` and commit `uv.lock`.
 - Commit messages follow [Conventional Commits](https://www.conventionalcommits.org/), for example

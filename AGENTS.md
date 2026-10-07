@@ -110,7 +110,8 @@ These are enforced, not aspirational. CI fails on any of them:
 - **Trivy must be clean** (`vuln`, `misconfig`, `secret`). There is no
   `.trivyignore`; a finding is fixed or explicitly accepted in its issue, never
   silenced in the repo.
-- The OpenAPI document must pass `openapi-spec-validator` (`tox -e openapi`).
+- The generated OpenAPI document must pass `openapi-spec-validator`
+  (`tox -e openapi` exports it and lints the result).
 - Supported Python is **3.14 and 3.15** (`requires-python = ">=3.14"`). Both
   block the `CI` gate; 3.15 installs as a pre-release until 3.15.0 ships.
 
@@ -137,10 +138,16 @@ These are enforced, not aspirational. CI fails on any of them:
 - Logging goes through stdlib `logging` as JSON lines. Errors return Falcon's
   JSON error body; unexpected exceptions become a bare 500 and never expose
   their message.
-- **The OpenAPI spec is written first.** `src/rfab_proxy/openapi.yaml`
-  (OpenAPI 3.1) is the source of truth and is served at `/openapi.json`. Adding
-  or changing a route means updating the spec in the same PR; a test fails when
-  routes and spec drift apart.
+- **The OpenAPI document is generated from the code** with spectree
+  (`src/rfab_proxy/openapi.py`); there is no hand-written spec. Document every
+  route with `@api.validate(resp=Response(...), tags=[...])`, a docstring whose
+  first line is the summary, and Pydantic models in `src/rfab_proxy/schemas.py`.
+  spectree validates responses against those models. It runs in strict mode,
+  so an undecorated route is left out, and a test fails when any exposed route
+  is missing from the document. It's served at `/docs/openapi.json`, with
+  Swagger UI, ReDoc and Scalar at `/docs/swagger`, `/docs/redoc` and
+  `/docs/scalar`. Export it with
+  `python -m rfab_proxy.openapi --output openapi.json`.
 
 ## Observability and credentials
 
