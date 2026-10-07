@@ -12,9 +12,20 @@ writing code, editing config, or opening a PR, there must be an issue covering
 it. Work that arrives mid-task and isn't covered by the issue in hand gets its
 **own issue** first; never fold it silently into an unrelated one.
 
-- Use the branch name Linear generates for the issue
-  (`feature/dpp-<n>-<slug>`), and put `Closes DPP-<n>` in the PR body.
+- **Linear stays out of git and GitHub.** This is a personal project: branch
+  names, commit messages, PR titles and PR bodies carry no Linear IDs or
+  references (`DPP-<n>`). Link the PR from the Linear ticket instead.
 - Move an issue to `Done` only once its PR is merged.
+
+### Outside contributions
+
+- **Pull requests from outside contributors must link an open GitHub issue**
+  with a closing keyword (`Closes #123`).
+  `.github/workflows/require-linked-issue.yml` closes any that don't, with a
+  comment pointing at `.github/CONTRIBUTING.md`. The gate exists to keep
+  open-source proposals manageable, so it never applies to the project's own
+  PRs: the repository owner, members, collaborators and bots (Dependabot,
+  release automation) are exempt.
 
 ## Identity and accounts
 
@@ -37,6 +48,14 @@ it. Work that arrives mid-task and isn't covered by the issue in hand gets its
 ## Branches and pull requests
 
 - **One branch and one PR per Linear issue**, merged into `master`.
+- **Branch names are `<type>/<short-slug>`**, where the type is the
+  Conventional Commit type (`feat/`, `fix/`, `docs/`, `ci/`, `build/`,
+  `chore/`), for example `docs/contributing-issue-gate`. Don't use the
+  `feature/dpp-<n>-...` names Linear generates; ticket IDs in branch names are
+  a work convention, not this project's.
+- **Head branches are deleted automatically when a PR merges** (repository
+  setting). GitHub then retargets PRs stacked on the merged branch, and
+  `git town sync` removes the local copy.
 - **Stacked PRs are managed with [git-town](https://www.git-town.com/)**, never
   by hand with `git switch -c` and `gh pr edit --base`. The repository is
   already configured (`main = master`, GitHub through the `gh` connector):
@@ -49,8 +68,9 @@ it. Work that arrives mid-task and isn't covered by the issue in hand gets its
   git town branch             # show the stack
   ```
 
-  Deleting a merged branch by hand closes any PR based on it, and git-town
-  avoids that by retargeting children when a parent ships.
+  Deleting a merged branch by hand closes any PR based on it; let GitHub's
+  automatic deletion and git-town handle it. git-town needs a one-time
+  `git town init` in a real terminal before its commands run unattended.
 - **Commit messages follow [Conventional Commits](https://www.conventionalcommits.org/)**
   (`feat:`, `fix:`, `build:`, `ci:`, `test:`, `docs:`, `chore:`, with an
   optional scope). The release pipeline will derive versions from them.

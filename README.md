@@ -112,6 +112,12 @@ mise run test         # tests on every supported Python
 
 Working agreements for contributors and coding agents are in [AGENTS.md](AGENTS.md).
 
+## Contributing
+
+Contributions are welcome, but **every pull request must link an open GitHub issue** (for example
+`Closes #123`), or it's closed automatically. Open or find the issue first and agree on the change
+there. See [CONTRIBUTING.md](.github/CONTRIBUTING.md) for the details.
+
 ## License
 
 Copyright (C) 2026 Dennis Philippe Pereyra Jr. (DPPereyra)
