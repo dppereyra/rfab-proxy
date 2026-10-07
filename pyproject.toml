@@ -15,7 +15,10 @@ authors = [
 ]
 readme = "README.md"
 dynamic = ["version"]
-dependencies = []
+dependencies = [
+    "falcon>=4.4,<5",
+    "uvicorn[standard]>=0.54,<0.55",
+]
 classifiers = [
   "Programming Language :: Python :: 3",
   "Programming Language :: Python :: 3.14",
@@ -30,6 +33,9 @@ dev = [
     "radon~=6.0.1",
     "vulture~=2.16",
 ]
+
+[project.scripts]
+rfab-proxy = "rfab_proxy.__main__:main"
 
 [tool.hatch.version]
 source = "vcs"
