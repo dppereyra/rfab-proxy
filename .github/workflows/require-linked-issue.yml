@@ -22,11 +22,13 @@ concurrency:
 jobs:
   linked-issue:
     name: Linked issue
-    # The maintainer tracks work outside GitHub issues; Dependabot opens its own PRs.
+    # The gate is for outside proposals only. The project's own people (owner,
+    # members, collaborators) track their work elsewhere, and bots such as
+    # Dependabot open their own PRs, so none of them are gated.
     if: >-
       github.event.pull_request.state == 'open'
-      && github.event.pull_request.user.login != 'dppereyra'
-      && github.event.pull_request.user.login != 'dependabot[bot]'
+      && github.event.pull_request.user.type != 'Bot'
+      && !contains(fromJSON('["OWNER", "MEMBER", "COLLABORATOR"]'), github.event.pull_request.author_association)
     runs-on: ubuntu-24.04
     permissions:
       pull-requests: write

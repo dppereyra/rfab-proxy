@@ -19,11 +19,13 @@ it. Work that arrives mid-task and isn't covered by the issue in hand gets its
 
 ### Outside contributions
 
-- **Pull requests from anyone else must link an open GitHub issue** with a
-  closing keyword (`Closes #123`). `.github/workflows/require-linked-issue.yml`
-  closes any that don't, with a comment pointing at `.github/CONTRIBUTING.md`.
-  PRs from `dppereyra` and Dependabot are exempt, since that work is tracked in
-  Linear.
+- **Pull requests from outside contributors must link an open GitHub issue**
+  with a closing keyword (`Closes #123`).
+  `.github/workflows/require-linked-issue.yml` closes any that don't, with a
+  comment pointing at `.github/CONTRIBUTING.md`. The gate exists to keep
+  open-source proposals manageable, so it never applies to the project's own
+  PRs: the repository owner, members, collaborators and bots (Dependabot,
+  release automation) are exempt.
 
 ## Identity and accounts
 
