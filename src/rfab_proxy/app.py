@@ -9,6 +9,7 @@ from rfab_proxy.config import Settings
 from rfab_proxy.health import Liveness, Readiness
 from rfab_proxy.logging import configure_logging
 from rfab_proxy.monitoring import init_sentry
+from rfab_proxy.telemetry import instrument, telemetry_from_env
 
 log = logging.getLogger(__name__)
 
@@ -24,6 +25,11 @@ def create_app(settings=None, readiness_checks=()):
     app.add_route("/healthz", Liveness())
     app.add_route("/readyz", Readiness(readiness_checks))
     return app
+
+
+def create_asgi_app(settings=None, environ=None):
+    """Server entry point: the app, wrapped in OpenTelemetry when configured."""
+    return instrument(create_app(settings), telemetry_from_env(environ))
 
 
 async def _handle_unexpected_error(req, _resp, _ex, _params):

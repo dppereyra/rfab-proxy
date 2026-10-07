@@ -8,7 +8,7 @@ from rfab_proxy.config import Settings
 def main():
     settings = Settings.from_env()
     uvicorn.run(
-        "rfab_proxy.app:create_app",
+        "rfab_proxy.app:create_asgi_app",
         factory=True,
         host=settings.host,
         port=settings.port,
