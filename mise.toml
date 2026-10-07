@@ -37,3 +37,7 @@ run = [
   "tox -e security",
   "trivy fs --scanners vuln,misconfig,secret --disable-telemetry --skip-dirs .venv --skip-dirs .tox --exit-code 1 .",
 ]
+
+[tasks.serve]
+description = "Run rfab-proxy locally with uvicorn"
+run = "uv run rfab-proxy"
