@@ -24,6 +24,7 @@ classifiers = [
 [project.optional-dependencies]
 dev = [
     "pytest>=9.1,<9.2",
+    "pytest-cov>=7.1,<7.2",
 ]
 
 [tool.hatch.version]
@@ -39,4 +40,4 @@ installer = "uv"
 
 # Local convenience only; tox (tox.ini) is the canonical runner and these mirror it.
 [tool.hatch.envs.default.scripts]
-tests = "pytest"
+tests = "pytest --cov"
