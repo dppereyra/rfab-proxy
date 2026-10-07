@@ -24,6 +24,8 @@ updates:
         patterns:
           - bandit
           - flake8
+          - jsonschema
+          - openapi-spec-validator
           - pytest
           - pytest-cov
           - radon

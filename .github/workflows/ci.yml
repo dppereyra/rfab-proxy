@@ -67,6 +67,7 @@ jobs:
           - security
           - complexity
           - deadcode
+          - openapi
           - lock
     steps:
       # hatch-vcs derives the version from git history, so tags are required.

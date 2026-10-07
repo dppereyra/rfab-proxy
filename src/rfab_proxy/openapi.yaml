@@ -1,0 +1,82 @@
+openapi: 3.1.0
+info:
+  title: rfab-proxy
+  description: HTTP proxy service built on Falcon.
+  # Replaced with the package version when served from /openapi.json.
+  version: 0.0.0
+paths:
+  /healthz:
+    get:
+      operationId: getLiveness
+      summary: Liveness probe
+      description: Answers as long as the process is serving requests.
+      tags: [health]
+      responses:
+        "200":
+          description: The process is alive.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Liveness"
+  /readyz:
+    get:
+      operationId: getReadiness
+      summary: Readiness probe
+      description: Answers 200 once every readiness check passes, 503 otherwise.
+      tags: [health]
+      responses:
+        "200":
+          description: Ready to receive traffic.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Readiness"
+        "503":
+          description: At least one readiness check failed.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /openapi.json:
+    get:
+      operationId: getOpenAPISpec
+      summary: This OpenAPI document
+      tags: [meta]
+      responses:
+        "200":
+          description: The OpenAPI document, as JSON.
+          content:
+            application/json:
+              schema:
+                type: object
+components:
+  schemas:
+    Liveness:
+      type: object
+      required: [status]
+      additionalProperties: false
+      properties:
+        status:
+          const: alive
+    Readiness:
+      type: object
+      required: [status]
+      additionalProperties: false
+      properties:
+        status:
+          const: ready
+    Error:
+      description: Falcon's JSON error body.
+      type: object
+      required: [title]
+      properties:
+        title:
+          type: string
+          examples: ["503 Service Unavailable"]
+        description:
+          type: string
+tags:
+  - name: health
+    description: Kubernetes-style probes.
+  - name: meta
+    description: Service metadata.
