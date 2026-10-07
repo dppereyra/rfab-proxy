@@ -75,3 +75,10 @@ def test_responses_match_the_documented_schemas(path, status, checks):
 
     assert result.status_code == status
     jsonschema.validate(result.json, _schema_for(load_spec(), path, status))
+
+
+def test_spec_declares_the_agpl_license():
+    assert load_spec()["info"]["license"] == {
+        "name": "GNU Affero General Public License v3.0 or later",
+        "identifier": "AGPL-3.0-or-later",
+    }

@@ -4,6 +4,9 @@ info:
   description: HTTP proxy service built on Falcon.
   # Replaced with the package version when served from /openapi.json.
   version: 0.0.0
+  license:
+    name: GNU Affero General Public License v3.0 or later
+    identifier: AGPL-3.0-or-later
 paths:
   /healthz:
     get:
