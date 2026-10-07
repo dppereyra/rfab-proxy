@@ -8,6 +8,7 @@ import falcon.asgi
 from rfab_proxy.config import Settings
 from rfab_proxy.health import Liveness, Readiness
 from rfab_proxy.logging import configure_logging
+from rfab_proxy.monitoring import init_sentry
 
 log = logging.getLogger(__name__)
 
@@ -16,6 +17,7 @@ def create_app(settings=None, readiness_checks=()):
     """Build the app; tests and the server both go through here."""
     settings = Settings.from_env() if settings is None else settings
     configure_logging(settings.log_level)
+    init_sentry(settings)
 
     app = falcon.asgi.App()
     app.add_error_handler(Exception, _handle_unexpected_error)
